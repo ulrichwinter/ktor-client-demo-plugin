@@ -20,7 +20,6 @@ val DemoPlugin = createClientPlugin("Demo") {
 //        BODY END
 
 //        val body = response.bodyAsText(Charsets.UTF_8)
-//        using bodyAsText() consumes the response content in a way, that the
 //        failure reason, if response.bodyAsText() is called:
 //        Parent job is Completed
 //                kotlinx.coroutines.JobCancellationException: Parent job is Completed; job=JobImpl{Completed}@1782e8fc
