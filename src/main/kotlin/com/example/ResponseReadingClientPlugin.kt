@@ -30,10 +30,14 @@ public class ResponseReading private constructor(
 
     private fun setupReadResponse(scope: HttpClient) {
         val observer: ResponseHandler = observer@{ response ->
-            val body = String(response.readBytes(), response.charset() ?: Charsets.UTF_8)
-            println("body as read in plugin: $body")
+            onResponse(response)
         }
         ResponseObserver.install(ResponseObserver(observer), scope)
+    }
+
+    private suspend fun onResponse(response: HttpResponse) {
+        val body = String(response.readBytes(), response.charset() ?: Charsets.UTF_8)
+        println("body as read in plugin: $body")
     }
 
     public class Config {
