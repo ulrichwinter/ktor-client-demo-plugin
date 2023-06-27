@@ -14,11 +14,19 @@ val DemoPlugin = createClientPlugin("Demo") {
         val body = String(response.readBytes(), response.charset() ?: Charsets.UTF_8)
 //        failure reason, if response.readBytes() is called:
 //        expected:<[Hello, world!]> but was:<[]>
+//        also, the body is missing in the client logging output:
+//        BODY START
+//
+//        BODY END
 
 //        val body = response.bodyAsText(Charsets.UTF_8) // using bodyAsText() consumes the response content in a way, that the
 //        failure reason, if response.bodyAsText() is called:
 //        Parent job is Completed
 //                kotlinx.coroutines.JobCancellationException: Parent job is Completed; job=JobImpl{Completed}@1782e8fc
+//        in this case, the client log mentions the body being omitted:
+//        BODY START
+//        [response body omitted]
+//        BODY END
     }
 }
 
