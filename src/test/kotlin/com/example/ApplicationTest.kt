@@ -1,3 +1,4 @@
+import com.example.ResponseReading
 import io.ktor.client.plugins.api.*
 import io.ktor.client.plugins.logging.*
 import io.ktor.client.request.*
@@ -38,7 +39,8 @@ class ApplicationTest {
                 logger = Logger.DEFAULT
                 level = LogLevel.ALL
             }
-            install(DemoPlugin)
+//            install(DemoPlugin)
+            install(ResponseReading)
         }
 
         val response = client.get("/")
