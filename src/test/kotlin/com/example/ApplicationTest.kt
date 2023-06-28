@@ -32,8 +32,9 @@ val DemoPlugin = createClientPlugin("Demo") {
 }
 
 class ApplicationTest {
+
     @Test
-    fun testRoot() = testApplication {
+    fun testRootSuccess() = testApplication {
         val client = createClient {
             install(Logging) {
                 logger = Logger.DEFAULT
@@ -46,5 +47,20 @@ class ApplicationTest {
         val response = client.get("/")
         assertEquals(HttpStatusCode.OK, response.status)
         assertEquals("Hello, world!", response.bodyAsText())
+    }
+    @Test
+    fun testError() = testApplication {
+        val client = createClient {
+            install(Logging) {
+                logger = Logger.DEFAULT
+                level = LogLevel.ALL
+            }
+//            install(DemoPlugin)
+            install(ResponseReading)
+        }
+
+        val response = client.get("/error")
+        assertEquals(HttpStatusCode.BadRequest, response.status)
+        assertEquals("There was an error:  Test exception", response.bodyAsText())
     }
 }
